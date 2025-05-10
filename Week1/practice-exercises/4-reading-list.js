@@ -9,3 +9,34 @@
  *  If you haven't read it log a string like You still need to read "The Lord of the Rings"
  */
 
+const bookShelf = [
+  {
+    title: "The Hobbit",
+    author: "J.R.R. Tolkien",
+    alreadyRead: false,
+  },
+
+  {
+    title: "The Culture Map",
+    author: "Erin Meyer",
+    alreadyRead: true,
+  },
+
+  {
+    title: "Being Happy!",
+    author: "Andrew Matthews",
+    alreadyRead: true,
+  },
+];
+
+for (key in bookShelf) { 
+  console.log(`${bookShelf[key].title} by ${bookShelf[key].author}`);
+  
+  const currentRead = bookShelf[key].alreadyRead;
+  if (currentRead) {
+    console.log(`You already read ${bookShelf[key].title}`);
+  } else {
+    console.log(`You still need to read ${bookShelf[key].title}`);
+  }
+};
+ 
