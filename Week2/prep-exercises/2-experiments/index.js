@@ -3,6 +3,10 @@
 function runExperiment(sampleSize) {
   const valueCounts = [0, 0, 0, 0, 0, 0];
 
+  for (let i = 1; i <= sampleSize; i++){
+    const randomNumber = Math.floor(Math.random() * 6) + 1;    
+    valueCounts[randomNumber-1]++;
+  }
   // TODO
   // Write a for loop that iterates `sampleSize` times (sampleSize is a number).
   // In each loop iteration:
@@ -14,6 +18,13 @@ function runExperiment(sampleSize) {
   //    element for value 2, etc.
 
   const results = [];
+
+  for (const value of valueCounts) {
+    const possibleSamples = ((value / sampleSize) * 100).toFixed(2);    
+    results.push(possibleSamples);
+  }
+
+  // console.log(roundToTwo(12.345)); // Output: 12.35
 
   // TODO
   // Write a for..of loop for the `valueCounts` array created in the previous
@@ -30,6 +41,12 @@ function runExperiment(sampleSize) {
 
 function main() {
   const sampleSizes = [100, 1000, 1000000];
+
+  for (const sampleSize of sampleSizes) {
+
+    const results = runExperiment(sampleSize);
+   console.log(results, sampleSize);  
+  }
 
   // TODO
   // Write a for..of loop that calls the `runExperiment()` function for each
