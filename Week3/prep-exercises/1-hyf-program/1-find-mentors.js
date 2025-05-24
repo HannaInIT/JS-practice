@@ -7,8 +7,19 @@ import { modules, students, mentors, classes } from "./hyf.js";
  * It should return an array of names. So something like:
  *  ['John', 'Mary']
  */
+
 const possibleMentorsForModule = (moduleName) => {
-  // TODO complete this function
+  const result = [];
+
+  for (let i = 0; i < mentors.length; i++) {
+    const mentor = mentors[i];
+
+    if (mentor.canTeach.includes(moduleName)) {
+      result.push(mentor.name);
+    }
+  }
+
+  return result;
 };
 // You can uncomment out this line to try your function
 // console.log(possibleMentorsForModule('using-apis'));
@@ -20,7 +31,10 @@ const possibleMentorsForModule = (moduleName) => {
  * It should return a single name.
  */
 const findMentorForModule = (moduleName) => {
-  // TODO complete this function
+  const names = possibleMentorsForModule(moduleName);
+
+  const randomIndex = Math.floor(Math.random() * names.length);
+  return names[randomIndex];
 };
 // You can uncomment out this line to try your function
-// console.log(findMentorForModule('javascript'));
+console.log(findMentorForModule("javascript"));

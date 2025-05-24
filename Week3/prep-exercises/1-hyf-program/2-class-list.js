@@ -12,7 +12,29 @@ import { modules, students, mentors, classes } from "./hyf.js";
  *  [{ name: 'John', role: 'student' }, { name: 'Mary', role: 'mentor' }]
  */
 const getPeopleOfClass = (className) => {
-  // TODO complete this function
+  let currentModule = "";
+  for (let i = 0; i < classes.length; i++) {
+    if (classes[i].name === className) {
+      currentModule = classes[i].currentModule;
+      break;
+    }
+  }
+
+  const currentMentors = [];
+  for (let i = 0; i < mentors.length; i++) {
+    if (mentors[i].nowTeaching === currentModule) {
+      currentMentors.push({ name: mentors[i].name, role: "mentor" });
+    }
+  }
+
+  const currentStudents = [];
+  for (let i = 0; i < students.length; i++) {
+    if (students[i].class === className) {
+      currentStudents.push({ name: students[i].name, role: "student" });
+    }
+  }
+
+  return currentStudents.concat(currentMentors);
 };
 // You can uncomment out this line to try your function
 // console.log(getPeopleOfClass('class34'));
@@ -30,7 +52,16 @@ const getPeopleOfClass = (className) => {
  *  }
  */
 const getActiveClasses = () => {
-  // TODO complete this function
+  const result = {};
+
+  for (let i = 0; i < classes.length; i++) {
+    if (classes[i].active) {
+      const className = classes[i].name;
+      result[className] = getPeopleOfClass(className);
+    }
+  }
+
+  return result;
 };
 // You can uncomment out this line to try your function
 // console.log(getActiveClasses());

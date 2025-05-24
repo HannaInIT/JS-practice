@@ -8,9 +8,31 @@ Once you have found those numbers, multiply the numbers and store the result of 
 
 
 const list = [1721, 979, 366, 299, 675, 1456];
-let result;
+let result = 0;
+const sum = 2020;
+let found = false;
+
+for (let i = 0; i < list.length; i++){
+  for (let j = 1 + i; j < list.length; j++){
+    for (let k = 1 + j; k < list.length; k++){
+
+      const a = list[i];
+      const b = list[j];
+      const c = list[k];
+
+      if ((a + b + c) === sum) {
+        result = a * b * c;
+        found = true;
+        break;
+      }
+    }    
+    if (found) break;
     
-// Write your code here
+  }
+  if (found) break;
+  
+}
+
 
 
 // TEST CODE, do not change

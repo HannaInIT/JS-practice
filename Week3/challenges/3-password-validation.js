@@ -16,8 +16,12 @@
  * 'ccccccccc' is VALID, c is present 9 times and should have been present at least 2 and at most 9 times
  */
 
+// check the concurrence of letter a in a password with min-max and provide an output
 const passwordList = [
     { times: '1-3', letter: 'a', password: 'abcde'},
     { times: '1-3', letter: 'b', password: 'cdefg'},
     { times: '2-9', letter: 'c', password: 'ccccccccc'}
 ];
+
+
+
