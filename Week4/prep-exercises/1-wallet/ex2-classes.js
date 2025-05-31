@@ -1,8 +1,10 @@
-import eurosFormatter from './euroFormatter.js';
+import eurosFormatter from "./euroFormatter.js";
 
 class Wallet {
   #name;
   #cash;
+  #dailyAllowance = 40;
+  #dayTotalWithdrawals = 0;
 
   constructor(name, cash) {
     this.#name = name;
@@ -11,6 +13,14 @@ class Wallet {
 
   get name() {
     return this.#name;
+  }
+
+    resetDailyAllowance() {
+    this.#dayTotalWithdrawals = 0;
+  }
+
+  setDailyAllowance(newAllowance) {
+    this.#dailyAllowance = newAllowance;
   }
 
   deposit(amount) {
@@ -23,6 +33,13 @@ class Wallet {
       return 0;
     }
 
+        if (this.#dailyAllowance < this.#dayTotalWithdrawals + amount) {
+      console.log(`Your limit is ${this.#dailyAllowance}`);
+
+      return 0;
+    }
+
+     this.#dayTotalWithdrawals += amount;
     this.#cash -= amount;
     return amount;
   }
@@ -45,9 +62,9 @@ class Wallet {
 }
 
 function main() {
-  const walletJack = new Wallet('Jack', 100);
-  const walletJoe = new Wallet('Joe', 10);
-  const walletJane = new Wallet('Jane', 20);
+  const walletJack = new Wallet("Jack", 100);
+  const walletJoe = new Wallet("Joe", 10);
+  const walletJane = new Wallet("Jane", 20);
 
   walletJack.transferInto(walletJoe, 50);
   walletJane.transferInto(walletJoe, 25);

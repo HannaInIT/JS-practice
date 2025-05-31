@@ -14,6 +14,8 @@ export default class Cell {
     this.y = y;
     this.alive = Math.random() > 0.5;
     this.nextAlive = false;
+
+     this.lifeTime = this.alive ? 1 : 0;
   }
 
   draw(context) {
@@ -28,7 +30,13 @@ export default class Cell {
 
     if (this.alive) {
       // Draw living this inside background
-      context.fillStyle = `rgb(24, 215, 236)`;
+ let opacity = 1;
+      if (this.lifeTime === 1) opacity = 0.25;
+      else if (this.lifeTime === 2) opacity = 0.5;
+      else if (this.lifeTime === 3) opacity = 0.75;
+      else opacity = 1;
+
+      context.fillStyle = `rgba(24, 215, 236, ${opacity})`;
       context.fillRect(
         this.x * Cell.size + 1,
         this.y * Cell.size + 1,
@@ -41,12 +49,23 @@ export default class Cell {
   liveAndLetDie(aliveNeighbors) {
     if (aliveNeighbors === 2) {
       // Living cell remains living, dead cell remains dead
+      if (this.alive) {
+         this.lifeTime++;
+      }
       this.nextAlive = this.alive;
     } else if (aliveNeighbors === 3) {
       // Dead cell becomes living, living cell remains living
+        if (!this.alive) {
+        this.lifeTime = 1;
+      } else {
+        this.lifeTime++;
+      }
       this.nextAlive = true;
     } else {
       // Living cell dies, dead cell remains dead
+        if (this.alive) {
+        this.lifeTime = 0;
+      }
       this.nextAlive = false;
     }
   }
